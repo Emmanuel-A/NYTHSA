@@ -2221,7 +2221,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   justify-content: center;
   align-items: center;
   font-size: 0.9rem;
-  bottom: 0.8rem;
+  bottom: 2rem;
   left: 2.2rem;
   line-height: calc(1 + 0.1 / var(--font-body-scale));
 }
@@ -3146,4 +3146,45 @@ details-disclosure > details {
     0% { transform: rotate(0deg) translateX(1em) rotate(0deg) scale(1.2); }
     100% { transform: rotate(360deg) translateX(1em) rotate(-360deg) scale(1.2); }
   }
+}
+
+
+body.index .announcement-bar-section {
+  display: none;
+}
+
+body.index header.header {
+  display: none;
+}
+
+body.index .footer__content-top {
+  display: none;
+}
+
+body.index .footer__payment {
+  display: none;
+}
+
+body.index footer.footer {
+  margin: 0;
+  padding-top: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+}
+
+body.index .footer__content-bottom {
+  border-top: 0;
+}
+
+body.index footer .footer__copyright {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 300;
+  font-family: 'Helvetica Neue', Arial,sans-serif;
+  letter-spacing: 0.1rem;
+  color: #fff;
+  margin: 0;
 }

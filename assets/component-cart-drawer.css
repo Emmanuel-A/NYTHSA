@@ -77,10 +77,12 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground),.2);
 }
 
 .drawer__heading {
-  margin: 0 0 1rem;
+  margin: 0;
+  font-size: 18px;
 }
 
 .drawer__close {
@@ -103,8 +105,8 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .drawer__close svg {
-  height: 2.4rem;
-  width: 2.4rem;
+  height: 1.8rem;
+  width: 1.8rem;
 }
 
 .drawer__contents {
@@ -309,6 +311,7 @@ cart-drawer-items {
 
 .cart-drawer .totals {
   justify-content: space-between;
+  margin: 0 0 17px 0;
 }
 
 .cart-drawer .price {
@@ -318,6 +321,7 @@ cart-drawer-items {
 .cart-drawer .tax-note {
   margin: 1.2rem 0 1rem auto;
   text-align: left;
+  display: none;
 }
 
 .cart-drawer .product-option dd {

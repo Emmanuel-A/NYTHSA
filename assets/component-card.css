@@ -170,7 +170,14 @@
 
 .card__heading {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: -5px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 580px) {
+  .card__heading {
+    font-size: 14px;
+  }
 }
 
 .card__heading:last-child {
@@ -339,6 +346,13 @@
 
 .card-information > .price {
   color: rgb(var(--color-foreground));
+  font-size: 14px;
+}
+
+@media screen and (max-width: 580px) {  
+  .card-information > .price {
+    font-size: 12px;
+  }
 }
 
 .card--horizontal .card-information > .price {

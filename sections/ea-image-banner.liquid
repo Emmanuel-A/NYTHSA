@@ -1,0 +1,280 @@
+{{ 'ea-section-image-banner.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
+  {%- style -%}
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }}::before,
+      #Banner-{{ section.id }} .banner__media::before,
+      #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
+        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+        content: '';
+        display: block;
+      }
+    }
+
+    @media screen and (min-width: 750px) {
+      #Banner-{{ section.id }}::before,
+      #Banner-{{ section.id }} .banner__media::before {
+        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+        content: '';
+        display: block;
+      }
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- style -%}
+  #Banner-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+<div
+  id="Banner-{{ section.id }}"
+  class="banner banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box != true %} banner--desktop-transparent{% endif %}"
+>
+  {%- if section.settings.image_2 != blank -%}
+    <div class="banner__media media show-mobile {% if section.settings.show_text_box != true %}banner__media-unstacked{% endif %}">
+      {%- liquid
+        assign image_height_2 = section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio
+        if section.settings.image != blank and section.settings.stack_images_on_mobile
+          assign sizes = '(min-width: 750px) 50vw, 100vw'
+        elsif section.settings.image != blank
+          assign sizes = '50vw'
+        else
+          assign sizes = '100vw'
+        endif
+      -%}
+
+      {%- capture mobileImage -%}
+        {{ section.settings.image_2
+            | image_url: width: 3840
+            | image_tag:
+              loading: 'lazy',
+              width: section.settings.image_2.width,
+              height: image_height,
+              class: 'desktop_image',
+              sizes: sizes,
+              widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' }}
+      {%- endcapture -%}
+
+      {{ mobileImage }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.image != blank -%}
+    <div class="banner__media media show-desktop{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.apply_gradient_overlay == true %} apply-gradient-overlay{% endif %}">
+      {%- liquid
+        assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
+        if section.settings.image_2 != blank and section.settings.stack_images_on_mobile
+          assign sizes = '(min-width: 750px) 50vw, 100vw'
+        elsif section.settings.image_2 != blank
+          assign sizes = '50vw'
+        else
+          assign sizes = '100vw'
+        endif
+      -%}
+
+      {%- capture desktopImage -%}
+        {{ section.settings.image
+          | image_url: width: 3840
+          | image_tag:
+            loading: 'lazy',
+            width: section.settings.image.width,
+            height: image_height,
+            class: 'desktop_image',
+            sizes: sizes,
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' }}
+      {%- endcapture -%}
+
+      {{ desktopImage }}
+    </div>
+  {%- endif -%}
+  
+  <div class="banner__content page-width">
+    <div class="banner__box banner--content-align-{{ section.settings.desktop_content_alignment }} content-container content-container--full-width-mobile gradient">
+        {%- for block in section.blocks -%}
+            {%- case block.type -%}
+                {%- when 'logo' -%}
+                    <div class="banner__heading-wrapper">
+                        <h1 class="banner__heading">
+                            <a href="{{ routes.root_url }}">
+                                {%- capture logo -%}
+                                    {{ block.settings.logo
+                                        | image_url: width: 750
+                                        | image_tag:
+                                        loading: 'lazy',
+                                        width: block.settings.logo.width,
+                                        height: image_height,
+                                        class: 'logo',
+                                        sizes: sizes,
+                                        widths: '150, 250, 300, 500, 750' }}
+                                {%- endcapture -%}
+
+                                {{ logo }}
+                            </a>
+                        </h1>
+                    </div>   
+                {%- endcase -%}
+            {%- endfor -%}
+        <div class="banner__menu-wrapper">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'menu' -%}  
+                    <a href="{{ block.settings.nav_link }}" class="" title="{{ block.settings.nav_text }}">
+                        {% if block.settings.nav_image_one != blank and block.settings.nav_image_two != blank %}
+                            {% if block.settings.nav_image_one != blank %}
+                                <span class="nav_image_one">
+                                    {{ block.settings.nav_image_one
+                                        | image_url: width: 750
+                                        | image_tag:
+                                        loading: 'lazy',
+                                        width: block.settings.nav_image_one.width,
+                                        height: image_height,
+                                        class: 'logo',
+                                        sizes: sizes,
+                                        widths: '150, 250, 300, 500, 750' }}
+                                </span>
+                            {% endif %}
+                            {% if block.settings.nav_image_two != blank %}
+                                <span class="nav_image_two">
+                                    {{ block.settings.nav_image_two
+                                        | image_url: width: 750
+                                        | image_tag:
+                                        loading: 'lazy',
+                                        width: block.settings.nav_image_two.width,
+                                        height: image_height,
+                                        class: 'logo',
+                                        sizes: sizes,
+                                        widths: '150, 250, 300, 500, 750' }}
+                                </span>   
+                            {% endif %}
+                        {% else %}
+                            {{ block.settings.nav_text }}
+                        {% endif %}
+                    </a>            
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.image-banner.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+        "type": "header",
+        "content": "Content"
+    },
+    {
+        "type": "text",
+        "id": "heading",
+        "default": "NYTHSA",
+        "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "apply_gradient_overlay",
+      "default": false,
+      "label": "Apply Gradient Overlay"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.image-banner.settings.image_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.image-banner.settings.image_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.image-banner.settings.image_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image-banner.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.image-banner.settings.image_height.label",
+      "info": "t:sections.image-banner.settings.image_height.info"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "logo",
+        "name": "Logo",
+        "limit": 1,
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            }
+        ]
+    },
+    {
+        "type": "menu",
+        "name": "Menu Navigation",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "nav_image_one",
+                "label": "Nav Link Image 1"
+            },
+            {
+                "type": "image_picker",
+                "id": "nav_image_two",
+                "label": "Nav Link Image 2 (Hover)"
+            },
+            {
+                "type": "text",
+                "id": "nav_text",
+                "label": "Nav Text"
+            },
+            {
+                "type": "url",
+                "id": "nav_link",
+                "label": "Nav Link"
+            }
+        ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.image-banner.presets.name"
+    }
+  ]
+}
+{% endschema %}
