@@ -1,46 +1,100 @@
 {
-    "sections": {
-      "image_banner": {
-        "type": "image-banner",
-        "blocks": {
-          "heading": {
-            "type": "heading",
-            "settings": {
-              "heading": "Browse our latest products",
-              "heading_size": "h0"
-            }
-          },
-          "button": {
-            "type": "buttons",
-            "settings": {
-              "button_label_1": "Shop all",
-              "button_link_1": "shopify://collections/all",
-              "button_style_secondary_1": true,
-              "button_label_2": "",
-              "button_link_2": "",
-              "button_style_secondary_2": false
-            }
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
           }
         },
-        "block_order": [
-          "heading",
-          "button"
-        ],
-        "settings": {
-          "image_overlay_opacity": 40,
-          "image_height": "large",
-          "desktop_content_position": "bottom-center",
-          "show_text_box": false,
-          "desktop_content_alignment": "center",
-          "color_scheme": "background-1",
-          "image_behavior": "none",
-          "mobile_content_alignment": "center",
-          "stack_images_on_mobile": false,
-          "show_text_below": false
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify:\/\/collections\/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
         }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "desktop_content_position": "bottom-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
       }
     },
-    "order": [
-      "image_banner"
-    ]
-  }
+    "ea86c220-2fc6-476f-ba01-3510194c7a08": {
+      "type": "ea-image-banner",
+      "blocks": {
+        "080192fe-a567-48af-82ef-8d6881fe3f4e": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify:\/\/shop_images\/NYTHSA_WORDMARK_LOGO_CHROME.png"
+          }
+        },
+        "015c7588-7f92-4b41-8933-058f68246f27": {
+          "type": "menu",
+          "settings": {
+            "nav_image_one": "shopify:\/\/shop_images\/NYTHSA_SHOP_SILVER.png",
+            "nav_image_two": "shopify:\/\/shop_images\/NYTHSA_SHOP_GOLD.png",
+            "nav_text": "",
+            "nav_link": "shopify:\/\/collections\/all"
+          }
+        },
+        "25642787-623d-46eb-9a92-f783b4bdf6aa": {
+          "type": "menu",
+          "settings": {
+            "nav_image_one": "shopify:\/\/shop_images\/NYTHSA_ABOUT_SILVER.png",
+            "nav_image_two": "shopify:\/\/shop_images\/NYTHSA_ABOUT_GOLD.png",
+            "nav_text": "",
+            "nav_link": "shopify:\/\/pages\/about"
+          }
+        },
+        "5d1aedf3-7974-4678-ab89-561cc6f003ab": {
+          "type": "menu",
+          "settings": {
+            "nav_image_one": "shopify:\/\/shop_images\/NYTHSA_INFO_SILVER.png",
+            "nav_image_two": "shopify:\/\/shop_images\/NYTHSA_INFO_GOLD.png",
+            "nav_text": "",
+            "nav_link": "shopify:\/\/pages\/contact"
+          }
+        }
+      },
+      "block_order": [
+        "080192fe-a567-48af-82ef-8d6881fe3f4e",
+        "015c7588-7f92-4b41-8933-058f68246f27",
+        "25642787-623d-46eb-9a92-f783b4bdf6aa",
+        "5d1aedf3-7974-4678-ab89-561cc6f003ab"
+      ],
+      "settings": {
+        "heading": "NYTHSA",
+        "image": "shopify:\/\/shop_images\/front-page-image.png",
+        "image_2": "shopify:\/\/shop_images\/Job_0217_copy_2.jpg",
+        "image_overlay_opacity": 0,
+        "apply_gradient_overlay": false,
+        "image_height": "large"
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "ea86c220-2fc6-476f-ba01-3510194c7a08"
+  ]
+}
