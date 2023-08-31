@@ -2303,6 +2303,10 @@ product-info .loading-overlay:not(.hidden) ~ *,
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
 }
 
+.header-wrapper.color-transparent {
+  background-color: transparent;
+}
+
 .header {
   display: grid;
   grid-template-areas: 'left-icons heading icons';
@@ -3187,4 +3191,8 @@ body.index footer .footer__copyright {
   letter-spacing: 0.1rem;
   color: #fff;
   margin: 0;
+}
+
+body.index footer .footer__copyright .copyright__content a {
+  color: #ffffff;
 }

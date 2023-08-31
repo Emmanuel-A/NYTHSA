@@ -4,22 +4,18 @@
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- if settings.predictive_search_enabled -%}
-  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'td-component-price.css' | asset_url }}" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 {%- if section.settings.menu_type_desktop == 'mega' -%}
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
   <noscript>{{ 'component-mega-menu.css' | asset_url | stylesheet_tag }}</noscript>
 {%- endif -%}
-{%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-  {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
-{%- endif -%}
-
 {%- if settings.cart_type == "drawer" -%}
   {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
   {{ 'component-cart.css' | asset_url | stylesheet_tag }}
   {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'td-component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
   {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
@@ -36,20 +32,21 @@
     margin-left: -1.2rem;
   }
 
+  .header__heading-logo {
+    max-width: {{ settings.logo_width }}px;
+  }
 
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
-    .scrolled-past-header .header__heading-logo-wrapper {
+    .scrolled-past-header .header__heading-logo {
       width: 75%;
     }
   {%- endif -%}
 
-  {%- if section.settings.menu_type_desktop != "drawer" -%}
-    @media screen and (min-width: 990px) {
-      header-drawer {
-        display: none;
-      }
+  @media screen and (min-width: 990px) {
+    header-drawer {
+      display: none;
     }
-  {%- endif -%}
+  }
 
   .menu-drawer-container {
     display: flex;
@@ -123,9 +120,6 @@
 {%- if settings.cart_type == "drawer" -%}
   <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
-{%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-  <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
 
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
   <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
@@ -142,22 +136,13 @@
     <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
   </symbol>
 </svg>
-
-{%- liquid
-  for block in section.blocks
-    if block.type == '@app'
-      assign has_app_block = true
-    endif
-  endfor
--%}
-
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}">
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} {% if template == 'index' and section.settings.transparent_header == true %} transparent-header-home {% endif %} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
     {%- if section.settings.menu != blank -%}
-      <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+      <header-drawer data-breakpoint="tablet">
         <details id="Details-menu-drawer-container" class="menu-drawer-container">
           <summary class="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
-            <span>
+            <span style="{% if template == 'index' and section.settings.transparent_header == true %}--transparentHeaderMenu: {{ section.settings.text_color }} {% endif %}">
               {% render 'icon-hamburger' %}
               {% render 'icon-close' %}
             </span>
@@ -230,7 +215,7 @@
                 </nav>
                 <div class="menu-drawer__utility-links">
                   {%- if shop.customer_accounts_enabled -%}
-                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide">
+                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5">
                       {% render 'icon-account' %}
                       {%- liquid
                         if customer
@@ -240,31 +225,6 @@
                         endif
                       -%}
                     </a>
-                  {%- endif -%}
-                  {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-                    <div class="menu-drawer__localization header__localization">
-                      {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-                        <localization-form>
-                          {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
-                            <div class="no-js-hidden">
-                              <h2 class="visually-hidden" id="HeaderCountryMobileLabel">{{ 'localization.country_label' | t }}</h2>
-                              {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
-                            </div>
-                          {%- endform -%}
-                        </localization-form>
-                      {% endif %}
-
-                      {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-                        <localization-form>
-                          {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
-                            <div class="no-js-hidden">
-                              <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">{{ 'localization.language_label' | t }}</h2>
-                              {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
-                            </div>
-                          {%- endform -%}
-                        </localization-form>
-                      {%- endif -%}
-                    </div>
                   {%- endif -%}
                   <ul class="list list-social list-unstyled" role="list">
                     {%- if settings.social_twitter_link != blank -%}
@@ -432,40 +392,27 @@
       </details-modal>
     {%- endif -%}
 
-    {%- if section.settings.logo_position != 'middle-center' -%}
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+    {%- if section.settings.logo != blank or section.settings.transparent_logo != blank -%}
+      {%- if section.settings.logo_position != 'middle-center' -%}
+        <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
+          {% if request.page_type == 'index' and section.settings.transparent_header == true %}
+            {%- assign transparent_logo = section.settings.logo -%}
+          {% else %}
+            {%- assign transparent_logo = section.settings.transparent_logo -%}
+          {% endif %}
+          <img class="site-header__logo-image site-header__logo-image--transparent" src="{{ transparent_logo | img_url: image_size }}" srcset="{{ transparent_logo | img_url: image_size }} 1x, {{ transparent_logo | img_url: image_size, scale: 2 }} 2x" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
+        </a>
       {%- endif -%}
-          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if settings.logo != blank -%}
-              <div class="header__heading-logo-wrapper">
-                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-                {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                {{ settings.logo | image_url: width: 600 | image_tag:
-                  class: 'header__heading-logo motion-reduce',
-                  widths: widths,
-                  height: logo_height,
-                  width: settings.logo_width,
-                  alt: logo_alt,
-                  sizes: sizes,
-                  preload: true
-                }}
-              </div>
-            {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
-            {%- endif -%}
-          </a>
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {%- endif -%}
+    {%- else -%} 
+      <h1>
+        <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+      </h1>
     {%- endif -%}
 
     {%- if section.settings.menu != blank -%}
       {%- if section.settings.menu_type_desktop == 'dropdown' -%}
         <nav class="header__inline-menu">
-          <ul class="list-menu list-menu--inline" role="list">
+          <ul class="list-menu list-menu--inline{% if template == 'index' and section.settings.transparent_header == true %} transparent-header-menu{% endif %}" role="list" style="{% if template == 'index' and section.settings.transparent_header == true %}--transparentHeaderMenu: {{ section.settings.text_color }} {% endif %}">
             {%- for link in section.settings.menu.links -%}
               <li>
                 {%- if link.links != blank -%}
@@ -513,7 +460,7 @@
             {%- endfor -%}
           </ul>
         </nav>
-      {%- elsif section.settings.menu_type_desktop != 'drawer' -%}
+      {%- else -%}
         <nav class="header__inline-menu">
           <ul class="list-menu list-menu--inline" role="list">
             {%- for link in section.settings.menu.links -%}
@@ -567,21 +514,15 @@
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if settings.logo != blank -%}
-              <div class="header__heading-logo-wrapper">
-                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-                {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                {{ settings.logo | image_url: width: 600 | image_tag:
-                  class: 'header__heading-logo',
-                  widths: widths,
-                  height: logo_height,
-                  width: settings.logo_width,
-                  alt: logo_alt,
-                  sizes: sizes,
-                  preload: true
-                }}
-              </div>
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {{ settings.logo | image_url: width: 500 | image_tag:
+                class: 'header__heading-logo',
+                widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                height: logo_height,
+                width: settings.logo_width,
+                alt: logo_alt
+              }}
             {%- else -%}
               <span class="h2">{{ shop.name }}</span>
             {%- endif -%}
@@ -591,30 +532,7 @@
       {%- endif -%}
     {%- endif -%}
 
-    <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header__localization{% endif %}">
-      <div class="desktop-localization-wrapper">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form class="small-hide medium-hide">
-            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {% endif %}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form class="small-hide medium-hide">
-            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
+    <div class="header__icons" style="{% if template == 'index' and section.settings.transparent_header == true %}--transparentHeaderMenu: {{ section.settings.text_color }} {% endif %}">
       <details-modal class="header__search">
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
@@ -712,13 +630,6 @@
         </a>
       {%- endif -%}
 
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when '@app' -%}
-            {% render block %}
-        {%- endcase -%}
-      {%- endfor -%}
-
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {%- liquid
           if cart == empty
@@ -742,7 +653,7 @@
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
 {%- if settings.cart_type == "notification" -%}
-  {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
+  {%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
 {%- endif -%}
 
 {% javascript %}
@@ -901,8 +812,134 @@
 {
   "name": "t:sections.header.name",
   "class": "section-header",
-  "max_blocks": 3,
   "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+        "type": "checkbox",
+        "id": "transparent_header",
+        "label": "Transparent background (Home page)",
+        "info": "Header background will be transparent only on Home page.",
+        "default": false
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Menu Link Color",
+      "info": "Menu link color will only work with transparent background.",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.logo_header.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.logo_help.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "cs": "Logo",
+        "da": "Logo",
+        "de": "Logo",
+        "en": "Logo",
+        "es": "Logo",
+        "fi": "Logo",
+        "fr": "Logo",
+        "it": "Logo",
+        "ja": "ロゴ",
+        "ko": "로고",
+        "nb": "Logo",
+        "nl": "Logo",
+        "pl": "Logo",
+        "pt-BR": "Logo",
+        "pt-PT": "Logótipo",
+        "sv": "Logotyp",
+        "th": "โลโก้",
+        "tr": "Logo",
+        "vi": "Logo",
+        "zh-CN": "logo",
+        "zh-TW": "商標"
+      }
+    },
+    {
+      "type": "image_picker",
+      "id": "transparent_logo",
+      "label": {
+        "cs": "Průhledné logo",
+        "da": "Gennemsigtigt logo",
+        "de": "Transparentes Logo",
+        "en": "Transparent logo",
+        "es": "Logo transparente",
+        "fi": "Läpinäkyvä logo",
+        "fr": "Logo transparent",
+        "it": "Logo trasparente",
+        "ja": "透明なロゴ",
+        "ko": "투명 로고",
+        "nb": "Gjennomsiktig logo",
+        "nl": "Transparant logo",
+        "pl": "Logo transparentne",
+        "pt-BR": "Logo transparente",
+        "pt-PT": "Logótipo transparente",
+        "sv": "Transparent logotyp",
+        "th": "โลโก้โปร่งใส",
+        "tr": "Şeffaf logo",
+        "vi": "Logo trong suốt",
+        "zh-CN": "透明的 logo",
+        "zh-TW": "透明商標"
+      },
+      "info": {
+        "cs": "Zobrazí se v případě zapnutí průhledného záhlaví.",
+        "da": "Vises, når det gennemsigtige sidehoved aktiveres.",
+        "de": "Wird angezeigt, wenn ein transparenter Header aktiviert ist.",
+        "en": "Displayed when transparent header is enabled.",
+        "es": "Se muestra cuando el encabezado transparente está habilitado.",
+        "fi": "Näytetään silloin, kun läpinäkyvä ylätunniste ei ole käytössä.",
+        "fr": "Affiché lorsque l'en-tête transparent est activé.",
+        "it": "Visualizzato quando l'header trasparente è abilitato.",
+        "ja": "透明なヘッダーが有効になっている場合に表示されます。",
+        "ko": "투명 헤더가 사용 가능한 경우 표시됩니다.",
+        "nb": "Vises når gjennomsiktig topptekst er aktivert.",
+        "nl": "Weergegeven wanneer transparante kop is ingeschakeld.",
+        "pl": "Wyświetlane przy włączonym nagłówku transparentnym.",
+        "pt-BR": "Exibido quando o cabeçalho transparente está habilitado.",
+        "pt-PT": "Apresentado quando o cabeçalho transparente é ativado.",
+        "sv": "Visas när transparent rubrik är aktiverad.",
+        "th": "จะแสดงเมื่อมีการใช้ส่วนหัวแบบโปร่งใส",
+        "tr": "Şeffaf üstbilgi etkin olduğunda görüntülenir.",
+        "vi": "Hiển thị khi bật đầu trang trong suốt.",
+        "zh-CN": "在启用透明标题时显示。",
+        "zh-TW": "在透明標頭啟用時顯示。"
+      }
+    },
     {
       "type": "select",
       "id": "logo_position",
@@ -925,8 +962,7 @@
         }
       ],
       "default": "middle-left",
-      "label": "t:sections.header.settings.logo_position.label",
-      "info": "t:sections.header.settings.logo_help.content"
+      "label": "t:sections.header.settings.logo_position.label"
     },
     {
       "type": "link_list",
@@ -945,10 +981,6 @@
         {
           "value": "mega",
           "label": "t:sections.header.settings.menu_type_desktop.options__2.label"
-        },
-        {
-          "value": "drawer",
-          "label": "t:sections.header.settings.menu_type_desktop.options__3.label"
         }
       ],
       "default": "dropdown",
@@ -984,60 +1016,6 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.all.colors.accent_1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.all.colors.accent_2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.all.colors.background_1.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.all.colors.background_2.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.all.colors.inverse.label"
-        },
-        {
-          "value": "transparent",
-          "label": "Transparent"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.all.colors.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.header.settings.header__3.content",
-      "info": "t:sections.header.settings.header__4.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": false,
-      "label": "t:sections.header.settings.enable_country_selector.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.header.settings.header__5.content",
-      "info": "t:sections.header.settings.header__6.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": false,
-      "label": "t:sections.header.settings.enable_language_selector.label"
     },
     {
       "type": "header",
@@ -1096,11 +1074,6 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 20
-    }
-  ],
-  "blocks": [
-    {
-      "type": "@app"
     }
   ]
 }

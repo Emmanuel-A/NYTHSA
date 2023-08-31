@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "ea-main-product",
       "blocks": {
         "title": {
           "type": "title",
