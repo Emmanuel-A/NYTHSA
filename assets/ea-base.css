@@ -3219,6 +3219,7 @@ body.index footer .footer__copyright {
   margin: 0;
 }
 
+body.index footer .footer__copyright .copyright__content, 
 body.index footer .footer__copyright .copyright__content a {
   color: #ffffff;
 }
