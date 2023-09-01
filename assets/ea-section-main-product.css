@@ -173,16 +173,16 @@
     margin-bottom: 0.6rem;
   }
 
-  .cart_note textarea {
+  .cart_note input[type='number'] {
     -webkit-appearance: none;
     appearance: none;
     resize: none;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     outline: none;
     border: 1px solid #7f7f7f;
     box-shadow: none;
-    padding: 4px;
+    padding: 14px 10px;
   }
 
   .product-form__input {
@@ -917,7 +917,7 @@
     left: 0;
     overflow: auto;
     width: 100%;
-    background: rgba(var(--color-foreground), 0.2);
+    background: rgba(var(--color-foreground), 0.5);
     height: 100%;
   }
   
@@ -931,14 +931,13 @@
     border-radius: var(--popup-corner-radius);
     background-color: rgb(var(--color-background));
     overflow: auto;
-    height: 80%;
     margin: 0 auto;
     left: 50%;
+    top: 25%;
     transform: translateX(-50%);
     margin-top: 5rem;
     width: 92%;
     position: absolute;
-    top: 0;
     padding: 0 1.5rem 0 3rem;
     border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
     border-style: solid;
@@ -961,8 +960,8 @@
   @media screen and (min-width: 750px) {
     .product-popup-modal__content {
       padding-right: 1.5rem;
-      margin-top: 10rem;
-      width: 70%;
+      width: 100%;
+      max-width: 600px;
       padding: 0 3rem;
     }
   
@@ -996,13 +995,15 @@
   
   .product-popup-modal__opener {
     display: inline-block;
+    margin: 0 !important;
+    padding: 0;
+    font-size: 12px;
   }
   
   .product-popup-modal__button {
-    font-size: 1.6rem;
+    font-size: 12px;
     padding-right: 1.3rem;
     padding-left: 0;
-    min-height: 4.4rem;
     text-underline-offset: 0.3rem;
     text-decoration-thickness: 0.1rem;
     transition: text-decoration-thickness var(--duration-short) ease;

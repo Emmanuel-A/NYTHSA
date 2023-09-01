@@ -200,7 +200,7 @@
                 {% if product.tags contains 'floor-length-earring' %}
                     <div class="cart_note">
                         <label for="CartNote">Length</label>
-                        <textarea name="note" id="CartNote">{{ cart.note }}</textarea>
+                        <input type="number" min="1" name="note" id="CartNote" value="{{ cart.note }}">
                     </div>
                 {% endif %}
               {%- when 'quantity_selector' -%}
@@ -476,8 +476,20 @@
             {% render 'icon-close' %}
           </button>
           <div class="product-popup-modal__content-info">
-            <h1 class="h2">{{ block.settings.page.title }}</h1>
-            {{ block.settings.page.content }}
+            {% if block.settings.page.title != blank %}<h1 class="h2">{{ block.settings.page.title }}</h1>{% endif %}
+            {% if block.settings.page.content != blank %}{{ block.settings.page.content }}{% endif %}
+
+            {% if block.settings.image != blank %}
+                {{ block.settings.image
+                    | image_url: width: 750
+                    | image_tag:
+                    loading: 'lazy',
+                    width: block.settings.image.width,
+                    height: image_height,
+                    class: 'logo',
+                    sizes: sizes,
+                    widths: '150, 250, 300, 500, 750' }}
+            {% endif %}
           </div>
         </div>
       </modal-dialog>
@@ -1000,6 +1012,11 @@
             "id": "text",
             "default": "Pop-up link text",
             "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
           },
           {
             "id": "page",
