@@ -220,9 +220,42 @@
                             </div>
                           </details>
                         {%- else -%}
-                          <a href="{{ link.url }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+                          {% comment %} <a href="{{ link.url }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
                             {{ link.title | escape }}
-                          </a>
+                          </a> {% endcomment %}
+
+                          {% if link.title == 'Shop' %}
+                            <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+                              <span class="current_state">
+                                <img src="{{ 'shop_nav_silver.png' | asset_url }}" width="100" height="30" title="{{ link.title | escape }}">
+                              </span>
+                              <span class="hover_state">
+                                <img src="{{ 'shop_nav_gold.png' | asset_url }}" width="100" height="30" title="{{ link.title | escape }}">
+                              </span>
+                            </a>
+                          {% elsif link.title == 'About' %}
+                            <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+                              <span class="current_state">
+                                <img src="{{ 'about_nav_silver.png' | asset_url }}" width="100" height="30" title="{{ link.title | escape }}">
+                              </span>
+                              <span class="hover_state">
+                                <img src="{{ 'about_nav_gold.png' | asset_url }}" width="100" height="30" title="{{ link.title | escape }}">
+                              </span>
+                            </a>
+                          {% elsif link.title == 'Info' %}
+                            <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+                              <span class="current_state">
+                                <img src="{{ 'info_nav_silver.png' | asset_url }}" width="100" height="30" title="{{ link.title | escape }}">
+                              </span>
+                              <span class="hover_state">
+                                <img src="{{ 'info_nav_gold.png' | asset_url }}" width="100" height="30" title="{{ link.title | escape }}">
+                              </span>
+                            </a>
+                          {% else %}
+                            <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+                              <span {%- if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+                            </a>
+                          {% endif %}
                         {%- endif -%}
                       </li>
                     {%- endfor -%}
