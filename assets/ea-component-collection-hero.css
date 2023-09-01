@@ -144,7 +144,6 @@
   
   @media screen and (max-width: 500px) {
     .collections_nav .collections_nav-container .collections_nav-item .collections_nav-link {
-        font-size: 12px;
         padding: 0 10px;
     }
   }
