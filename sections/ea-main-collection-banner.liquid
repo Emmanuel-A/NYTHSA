@@ -50,9 +50,11 @@
     <div class="collections_nav">
         <ul class="collections_nav-container">
             {% for collection in collections %}
+              {%- if collection.all_products_count > 0 -%}
                 <li class="collections_nav-item">
-                    <a href="{{ collection.url }}" class="collections_nav-link {% if request.path == collection.url %}active-page{% endif %}">{{ collection.title }}</a>
+                  <a href="{{ collection.url }}" class="collections_nav-link {% if request.path == collection.url %}active-page{% endif %}">{{ collection.title }}</a>
                 </li>
+              {%- endif -%}
             {% endfor %}
         </ul>
     </div>
