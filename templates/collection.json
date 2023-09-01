@@ -2,10 +2,11 @@
   "sections": {
     "banner": {
       "type": "ea-main-collection-banner",
-      "disabled": true,
       "settings": {
+        "show_collection_title": false,
         "show_collection_description": true,
         "show_collection_image": false,
+        "show_subcategories": true,
         "color_scheme": "background-1"
       }
     },
