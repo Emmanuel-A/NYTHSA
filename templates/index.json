@@ -46,7 +46,7 @@
         "080192fe-a567-48af-82ef-8d6881fe3f4e": {
           "type": "logo",
           "settings": {
-            "logo": "shopify:\/\/shop_images\/NYTHSA_WORDMARK_LOGO_CHROME.png"
+            "logo": "shopify:\/\/shop_images\/NYTHSA_WORDMARK_V2_CHROME.png"
           }
         },
         "015c7588-7f92-4b41-8933-058f68246f27": {
@@ -86,7 +86,7 @@
       "settings": {
         "heading": "NYTHSA",
         "image": "shopify:\/\/shop_images\/front-page-image.png",
-        "image_2": "shopify:\/\/shop_images\/Job_0217_copy_2.jpg",
+        "image_2": "shopify:\/\/shop_images\/Job_0131_copy2.jpg",
         "image_overlay_opacity": 0,
         "apply_gradient_overlay": false,
         "image_height": "large"
