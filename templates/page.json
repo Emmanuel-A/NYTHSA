@@ -8,38 +8,39 @@
         "padding_bottom": 28
       }
     },
-    "e421c162-81cf-4b06-81de-8f788e0e8917": {
-      "type": "image-with-text",
+    "c458b526-497a-42ed-a651-038e55607dad": {
+      "type": "rich-text",
       "blocks": {
-        "template--20292479746350__e421c162-81cf-4b06-81de-8f788e0e8917-text-1": {
+        "template--20292479746350__c458b526-497a-42ed-a651-038e55607dad-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "template--20292479746350__c458b526-497a-42ed-a651-038e55607dad-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>NYTHSA is an ongoing collection of handmade body adornments that reimagine the connection between our bodies and what’s physically held closest to them. The ultimate goal is to bring back sentimentality into the objects we own in a world that prioritizes fast-paced consumption. NYTHSA aims to use timelessness, quality, passion, and originality to create designs intended to last<\/p>",
-            "text_style": "body"
+            "text": "<p>NYTHSA is an ongoing collection of handmade body adornments that reimagine the connection between our bodies and what’s physically held closest to them. The ultimate goal is to bring back sentimentality into the objects we own in a world that prioritizes fast-paced consumption. NYTHSA aims to use timelessness, quality, passion, and originality to create designs intended to last<\/p>"
           }
         }
       },
       "block_order": [
-        "template--20292479746350__e421c162-81cf-4b06-81de-8f788e0e8917-text-1"
+        "template--20292479746350__c458b526-497a-42ed-a651-038e55607dad-heading-1",
+        "template--20292479746350__c458b526-497a-42ed-a651-038e55607dad-text-1"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/12D76C28-AD9C-48BE-A7FE-1CA9DE3A5995.jpg",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "background-1",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "main",
-    "e421c162-81cf-4b06-81de-8f788e0e8917"
+    "c458b526-497a-42ed-a651-038e55607dad"
   ]
 }
