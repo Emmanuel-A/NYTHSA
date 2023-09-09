@@ -11,13 +11,6 @@
     "e421c162-81cf-4b06-81de-8f788e0e8917": {
       "type": "image-with-text",
       "blocks": {
-        "template--20292479746350__e421c162-81cf-4b06-81de-8f788e0e8917-heading-1": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
-          }
-        },
         "template--20292479746350__e421c162-81cf-4b06-81de-8f788e0e8917-text-1": {
           "type": "text",
           "settings": {
@@ -27,7 +20,6 @@
         }
       },
       "block_order": [
-        "template--20292479746350__e421c162-81cf-4b06-81de-8f788e0e8917-heading-1",
         "template--20292479746350__e421c162-81cf-4b06-81de-8f788e0e8917-text-1"
       ],
       "settings": {
