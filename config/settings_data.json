@@ -131,6 +131,7 @@
     "checkout_logo_image": "shopify:\/\/shop_images\/NYTHSA_WORDMARK_V2_CHROME.png",
     "checkout_logo_position": "left",
     "checkout_logo_size": "small",
+    "checkout_heading_font": "Lora",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
