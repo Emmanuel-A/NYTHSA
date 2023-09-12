@@ -132,6 +132,7 @@
     "checkout_logo_position": "left",
     "checkout_logo_size": "small",
     "checkout_heading_font": "Lora",
+    "checkout_body_font": "Lora",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
