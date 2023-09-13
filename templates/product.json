@@ -46,7 +46,7 @@
           "type": "popup",
           "settings": {
             "text": "Size chart",
-            "image": "shopify:\/\/shop_images\/SIZING_CHART.png",
+            "image": "shopify:\/\/shop_images\/SIZING_CHART.svg",
             "page": ""
           }
         }
