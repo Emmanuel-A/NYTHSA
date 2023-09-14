@@ -27,7 +27,8 @@
         "907e30e0-21dd-4efb-ba30-512eaf6e470a": {
           "type": "note",
           "settings": {
-            "cart_note": false
+            "cart_note_label": "Length (inches)",
+            "cart_note": true
           }
         },
         "quantity_selector": {
