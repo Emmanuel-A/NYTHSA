@@ -199,7 +199,9 @@
               {%- when 'note' -%}
                 {% if product.tags contains 'floor-length-earring' %}
                     <div class="cart_note">
-                        <label for="CartNote">Length</label>
+                      {% if block.settings.cart_note_label != blank %}
+                        <label for="CartNote">{{ block.settings.cart_note_label }}</label>
+                      {% endif %}
                         <input type="number" min="1" name="note" id="CartNote" value="{{ cart.note }}">
                     </div>
                 {% endif %}
@@ -1029,6 +1031,12 @@
         "type": "note",
         "name": "Note",
         "settings": [
+          {
+            "type": "text",
+            "id": "cart_note_label",
+            "label": "Label",
+            "default": "Length (inches)"
+          },
           {
             "type": "checkbox",
             "id": "cart_note",
