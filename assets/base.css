@@ -3196,3 +3196,7 @@ body.index footer .footer__copyright {
 body.index footer .footer__copyright .copyright__content a {
   color: #ffffff;
 }
+
+.password__footer {
+  display: none;
+}
