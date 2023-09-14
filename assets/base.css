@@ -3197,6 +3197,10 @@ body.index footer .footer__copyright .copyright__content a {
   color: #ffffff;
 }
 
+.password-header {
+  height: 100vh;  
+}
+
 .password__footer {
   display: none;
 }
