@@ -3225,5 +3225,9 @@ body.index footer .footer__copyright .copyright__content a {
 }
 
 main#MainContent {
-    min-height: 55vh;
+  min-height: 55vh;
+}
+
+.password__footer {
+  display: none;
 }
