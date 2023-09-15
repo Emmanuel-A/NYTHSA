@@ -5,9 +5,9 @@
   src: url({{ "AvenirLight.ttf" | asset_url }}) format("truetype");
 } */
   
-h1, h2, h3 {
+/* h1, h2, h3 {
   font-family: "FreightBigPro", serif !important;
-}
+} */
 
 
 /* Color custom properties */
