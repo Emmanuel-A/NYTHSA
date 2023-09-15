@@ -1,5 +1,5 @@
 /* Custom Fonts */
-
+/* 
 @font-face {
   font-family: "AvenirLight", sans-serif;
   src: url({{ "AvenirLight.ttf" | asset_url }}) format("truetype");
@@ -15,7 +15,7 @@ h1, h2, h3 {
 }
 p, span {
   font-family: "AvenirLight" !important;
-}
+} */
 
 /* Color custom properties */
 
