@@ -835,7 +835,8 @@ function getFocusableElements(container) {
             // Show only the thumbnails for selected color
             document.querySelectorAll('[thumbnail-alt]').forEach(img => img.style.display = 'none')
             const currentImgAlt = this.currentVariant.featured_image.alt
-            const thumbnailSelector = `[thumbnail-alt = '${currentImgAlt}']`
+            console.log('CurrentImgAlt ',currentImgAlt);
+            const thumbnailSelector = `[thumbnail-alt*='${currentImgAlt}']`
             document.querySelectorAll(thumbnailSelector).forEach(img => img.style.display = 'block')
 
         } else {
