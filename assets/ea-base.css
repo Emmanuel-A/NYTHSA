@@ -2,7 +2,7 @@
 
 @font-face {
 font-family: "BasicallyASansSerif-Regular";
-src: url({{ "BasicallyASansSerif-Regular.woff2" | asset_url }}) format("ttf");
+src: url({{ "BasicallyASansSerif-Regular.woff2" | asset_url }}) format("truetype");
 }
 
 
