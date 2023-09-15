@@ -1,10 +1,9 @@
 /* Custom Fonts */
 
 @font-face {
-font-family: "BasicallyASansSerif-Regular";
-src: url({{ "BasicallyASansSerif-Regular.woff2" | asset_url }}) format("truetype");
+font-family: "AvenirLight";
+src: url({{ "AvenirLight.ttf" | asset_url }}) format("truetype");
 }
-
 
 
 /* Color custom properties */
