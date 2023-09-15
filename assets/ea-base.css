@@ -10,6 +10,9 @@
   src: url({{ "FreightBigProBook-Regular.woff2" | asset_url }}) format("woff2");
 }
 
+h1, h2, h3 {
+  font-family: "FreightBigPro" !important;
+}
 p, span {
   font-family: "AvenirLight" !important;
 }
