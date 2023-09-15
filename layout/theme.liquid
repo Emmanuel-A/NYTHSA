@@ -40,7 +40,7 @@
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
     %}
 
-    {% style %}
+    <style>
       @font-face {
         font-family: "AvenirLight", sans-serif;
         src: url({{ "AvenirLight.ttf" | asset_url }}) format("truetype");
@@ -51,6 +51,10 @@
         src: url({{ "FreightBigProBook-Regular.woff2" | asset_url }}) format("woff2");
         font-style: italic; 
       }
+    </style>
+
+    {% style %}
+      
 
       h1, h2, h3 {
         font-family: "FreightBigPro" !important;
