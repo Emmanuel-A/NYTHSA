@@ -1,12 +1,12 @@
 /* Custom Fonts */
 
 @font-face {
-  font-family: "AvenirLight";
+  font-family: "AvenirLight", sans-serif;
   src: url({{ "AvenirLight.ttf" | asset_url }}) format("truetype");
 }
 
 @font-face {
-  font-family: "FreightBigPro";
+  font-family: "FreightBigPro", serif;
   src: url({{ "FreightBigProBook-Regular.woff2" | asset_url }}) format("woff2");
 }
 
