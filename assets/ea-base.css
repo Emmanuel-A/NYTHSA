@@ -5,7 +5,7 @@ font-family: "AvenirLight";
 src: url({{ "AvenirLight.ttf" | asset_url }}) format("truetype");
 }
 
-p {
+p, span {
   font-family: "AvenirLight" !important;
 }
 
