@@ -247,8 +247,9 @@
               endcapture
               assign media_index = media_index | plus: 1
             -%}
+            {{ product.selected_or_first_available_variant.featured_image.alt }}
             <li
-              {% unless product.selected_or_first_available_variant.featured_image.alt contains media.alt and product.selected_or_first_available_variant.featured_image.alt contains blank %}
+              {% unless product.selected_or_first_available_variant.featured_image.alt contains media.alt and product.selected_or_first_available_variant.featured_image.alt != blank %}
                 style="display: none;"
               {% endunless %}
               thumbnail-alt="{{ media.alt }}"
