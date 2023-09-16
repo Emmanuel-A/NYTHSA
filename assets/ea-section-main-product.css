@@ -181,6 +181,7 @@
     font-size: 12px;
     outline: none;
     border: 1px solid #7f7f7f;
+    border-radius: 0;
     box-shadow: none;
     padding: 14px 10px;
   }
