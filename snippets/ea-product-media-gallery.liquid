@@ -248,9 +248,9 @@
               assign media_index = media_index | plus: 1
             -%}
             <li
-              {% unless product.selected_or_first_available_variant.featured_image.alt contains media.alt and product.selected_or_first_available_variant.featured_image.alt != blank %}
+              {% comment %} {% unless product.selected_or_first_available_variant.featured_image.alt contains media.alt and product.selected_or_first_available_variant.featured_image.alt != blank %}
                 style="display: none;"
-              {% endunless %}
+              {% endunless %} {% endcomment %}
               thumbnail-alt="{{ media.alt }}"
               id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}{{ id_append }}"
               class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains media.src %} thumbnail-list_item--variant{% endif %}"
